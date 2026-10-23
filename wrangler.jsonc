@@ -1,13 +1,9 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "freddies-wifi",
-  "main": ".open-next/worker.js",
+  "pages_build_output_dir": "./dist",
   "compatibility_date": "2026-10-23",
   "compatibility_flags": ["nodejs_compat"],
-  "assets": {
-    "directory": ".open-next/assets",
-    "binding": "ASSETS"
-  },
   "d1_databases": [
     {
       "binding": "DB",
