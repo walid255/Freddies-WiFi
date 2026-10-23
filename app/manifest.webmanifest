@@ -1,0 +1,17 @@
+{
+  "name": "Freddies WiFi Network Console",
+  "short_name": "Freddies WiFi",
+  "description": "Secure ISP network operations console",
+  "start_url": "/dashboard",
+  "display": "standalone",
+  "background_color": "#f6f8fb",
+  "theme_color": "#0b1724",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

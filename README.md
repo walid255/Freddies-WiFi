@@ -1,2 +1,24 @@
-# Freddies-WiFi
-ISP
+# Freddies WiFi
+
+Multi-tenant ISP operations console built with Next.js App Router / React Server Components and deployed on Cloudflare Workers. D1 holds relational tenant data; KV and R2 bindings are ready for cache and media integrations. The responsive operator dashboard uses server-rendered, minimized DTOs and tenant-scoped aggregate queries.
+
+## Local setup
+
+1. Install Node.js 20+ and dependencies with `npm install`.
+2. Create D1, KV, and R2 resources in Cloudflare, then replace the binding IDs and names in `wrangler.jsonc`.
+3. Configure Cloudflare Access for the app. Set `CF_ACCESS_TEAM_DOMAIN` and `CF_ACCESS_AUD` in Worker secrets/vars (or local `.dev.vars`).
+4. Apply the schema with `npx wrangler d1 migrations apply freddies-wifi --local`.
+5. Provision tenant and user records through a trusted administrative process. `users.access_sub` must match the immutable subject (`sub`) claim in a verified Cloudflare Access JWT. Never provision users from an unverified browser request.
+6. Run `npm run dev` for the local Workers runtime.
+
+Cloudflare Access protects the app at the edge. Middleware gates protected paths, and every server component/API handler independently verifies the signed Access JWT, resolves an active application user, and enforces role checks. SQL access is bound to the authenticated user's tenant; the sessions API returns a minimized DTO and is uncached. Components do not render user-authored HTML. There are currently no realtime subscriptions or untrusted HTML templates.
+
+## Deploy
+
+Configure the Cloudflare resources and production Access secrets, then run `npm run deploy`. Do not use placeholder IDs or domains from `wrangler.jsonc` in production. Use Cloudflare's encrypted secrets for credentials, restrict D1/KV/R2 access to this Worker, and configure database backups, alerting, and retention before onboarding customer data.
+
+## Integration status
+
+The database and runtime bindings are provisioned for the planned product, but external services are intentionally not represented as connected: Omada, mobile-money providers, RADIUS/FreeRADIUS, captive-portal customization, ad delivery, and payment webhooks still require their provider-specific adapters, credentials, and deployment/testing. Cloudflare Workers cannot originate RADIUS UDP traffic; deploy FreeRADIUS in a network environment that supports UDP and connect it through a separately authenticated, network-restricted service. Do not expose RADIUS shared secrets to the browser or Worker.
+
+The dashboard currently has a tenant-scoped read model and an authenticated sessions API. New server procedures must use `requireProcedure`, check resource ownership/tenant scope in each query, and return explicit DTOs rather than database rows.
