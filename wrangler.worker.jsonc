@@ -12,24 +12,8 @@
     {
       "binding": "DB",
       "database_name": "freddies-wifi",
-      "database_id": "REPLACE_WITH_D1_DATABASE_ID",
+      "database_id": "9681b093-5134-4d11-a353-8ad10e1d3c5c",
       "migrations_dir": "migrations"
     }
-  ],
-  "kv_namespaces": [
-    {
-      "binding": "CACHE",
-      "id": "REPLACE_WITH_KV_NAMESPACE_ID"
-    }
-  ],
-  "r2_buckets": [
-    {
-      "binding": "MEDIA",
-      "bucket_name": "freddies-wifi-media"
-    }
-  ],
-  "vars": {
-    "CF_ACCESS_TEAM_DOMAIN": "REPLACE_WITH_TEAM.cloudflareaccess.com",
-    "CF_ACCESS_AUD": "REPLACE_WITH_ACCESS_APPLICATION_AUD"
-  }
+  ]
 }
