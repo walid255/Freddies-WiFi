@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "npm run build && wrangler pages dev dist",
     "build": "opennextjs-cloudflare build --config wrangler.worker.jsonc && node scripts/prepare-pages.mjs",
-    "build:next": "next build",
+    "build:next": "next build --webpack",
     "build:worker": "opennextjs-cloudflare build --config wrangler.worker.jsonc",
     "preview": "npm run build && wrangler pages dev dist",
     "deploy": "npm run build && wrangler pages deploy dist",
