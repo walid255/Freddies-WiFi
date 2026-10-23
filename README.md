@@ -15,7 +15,9 @@ Cloudflare Access protects the app at the edge. Middleware gates protected paths
 
 ## Deploy
 
-Configure the Cloudflare resources and production Access secrets, then run `npm run deploy`. Do not use placeholder IDs or domains from `wrangler.jsonc` in production. Use Cloudflare's encrypted secrets for credentials, restrict D1/KV/R2 access to this Worker, and configure database backups, alerting, and retention before onboarding customer data.
+This application uses Next.js server rendering and must be deployed as a **Cloudflare Worker**, not as a Cloudflare Pages static site. The Pages build pipeline expects a `dist` directory and cannot run this OpenNext Worker. In Cloudflare, create a Worker using **Workers Builds** and connect this repository; set the build command to `npm run build:worker` and the deploy command to `npm run deploy`. Do not set a Pages output directory. The Worker build creates `.open-next/worker.js` and `.open-next/assets`; Wrangler uses those paths from `wrangler.jsonc`. `npm run build` is the underlying Next.js build invoked by OpenNext.
+
+For a local deployment, first configure D1/KV/R2 resources and production Access settings in `wrangler.jsonc`/Worker secrets, then run `npm run deploy:local` (or run `npm run build` followed by `npm run deploy`). Never deploy with the placeholder resource IDs or Access values. Use Cloudflare's encrypted secrets for credentials, restrict D1/KV/R2 access to this Worker, and configure database backups, alerting, and retention before onboarding customer data.
 
 ## Integration status
 
