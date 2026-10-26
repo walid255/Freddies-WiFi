@@ -8,7 +8,7 @@
     "build:next": "next build --webpack",
     "build:worker": "opennextjs-cloudflare build --config wrangler.worker.jsonc",
     "preview": "npm run build && wrangler pages dev dist",
-    "deploy": "npm run build && wrangler pages deploy dist",
+    "deploy": "npm run build && wrangler pages deploy",
     "deploy:local": "npm run deploy",
     "test": "node --experimental-strip-types --test",
     "cf-typegen": "wrangler types"
